@@ -90,3 +90,7 @@ ENV/
 
 # PyCharm project ignore 
 .idea/
+
+# SQLite database
+sc/db.sqlite3
+
