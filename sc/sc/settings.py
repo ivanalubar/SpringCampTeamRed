@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
     'elearning.apps.ElearningConfig',
     'django.contrib.admin',
     'django.contrib.auth',
