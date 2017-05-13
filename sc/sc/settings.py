@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'django.contrib.auth.views.login',
+
 ]
 
 MIDDLEWARE = [
@@ -119,3 +121,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/elearning/'
+LOGIN_URL = '/elearning/login/'

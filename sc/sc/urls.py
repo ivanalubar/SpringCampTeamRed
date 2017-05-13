@@ -16,9 +16,13 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
-
+from django.contrib.auth import views as auth_views
+import django.views as V
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^elearning/', include('elearning.urls')),
-
+    url(r'^registration/', include('elearning.urls')),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^signup/$',  include('elearning.urls')),
 ]
