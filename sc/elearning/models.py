@@ -17,14 +17,14 @@ class Program(models.Model):
 
 
 class Course(models.Model):
-    name = models.CharField(max_length=256)
-    level = models.ForeignKey(Group, related_name='level')
-    area = models.ForeignKey(Group, related_name='area')
-    duration = models.IntegerField(default=0)
-    start = models.DateField()
-    end = models.DateField()
-    number_of_people = models.IntegerField(default=0)
-    programmes = models.ManyToManyField(Program)
+    name = models.CharField(max_length=256, blank=False, null=False)
+    level = models.ForeignKey(Group, related_name='level', blank=False, null=False)
+    area = models.ForeignKey(Group, related_name='area', blank=False, null=False)
+    duration = models.IntegerField(default=0, blank=False, null=False)
+    start = models.DateField(blank=False, null=False)
+    end = models.DateField(blank=False, null=False)
+    number_of_people = models.IntegerField(default=0, blank=False, null=True)
+    programmes = models.ManyToManyField(Program, blank=False, null=False)
 
 
 class Content(models.Model):

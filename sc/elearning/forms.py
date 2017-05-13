@@ -5,7 +5,7 @@ from django.forms import ModelForm, widgets, CharField, Form, PasswordInput, mod
 class UserForm(ModelForm):
 
     class Meta:
-        model = models.NasUser
+        model = ModelForm.NasUser
         fields = ('username', 'email', 'password','first_name', 'last_name','group')
 
 class LoginForm(Form):
@@ -14,10 +14,10 @@ class LoginForm(Form):
 
 class CourseForm(ModelForm):
     class Meta:
-        model = models.Course
+        model = ModelForm.Course
         fields = ('name', 'start', 'duration', 'level', 'area', 'end', 'number_of_people', 'programmes')
 
 class ProgrammeForm(ModelForm):
     class Meta:
-        model = models.Programme
+        model = ModelForm.Programme
         fields = ('name')
