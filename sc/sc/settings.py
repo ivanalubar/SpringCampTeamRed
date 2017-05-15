@@ -124,3 +124,10 @@ STATIC_URL = '/static/'
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/elearning/'
 LOGIN_URL = '/elearning/login/'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'smartsystemsdd@gmail.com'
+EMAIL_HOST_PASSWORD = 'maxflexo616043'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

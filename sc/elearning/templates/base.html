@@ -7,8 +7,51 @@
     {% endblock %}
 </head>
 <body>
-    {% block body %}
+    <br>
+    <div class="container">
+     <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/elearning">Spring Camp</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/elearning">Home</a> </li>
+            </ul>
+              <ul class="nav navbar-nav">
+                <li><a href="/elearning/login">Login</a> </li>
+            </ul>
+              <ul class="nav navbar-nav">
+                <li><a href="/elearning/logout">Logout</a> </li>
+            </ul>
+              <ul class="nav navbar-nav">
+                <li><a href="/elearning/profile">Profile</a> </li>
+            </ul>
+              <ul class="nav navbar-nav">
+                <li><a href="/elearning/profile/edit">Edit profile</a> </li>
+            </ul>
+              <ul class="nav navbar-nav">
+                <li><a href="/elearning/change-password">Change password</a> </li>
+            </ul>
+              <ul class="nav navbar-nav">
+                <li><a href="/elearning/reset-password">Reset password</a> </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+              <li><a href="/elearning/registration">Register</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+     {% block body %}
     <h1>Base</h1>
     {% endblock %}
+        </div>
 </body>
 </html>

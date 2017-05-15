@@ -1,12 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 from datetime import date
+from django.db.models.signals import post_save
 
 
-# Create your models here.
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    description = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=100, default='')
+    phone = models.IntegerField(default=0)
 
-#class Groups(Group):
-    #type = models.CharField(max_length=50)
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+
+post_save.connect(create_profile, sender = User)
+
 
 class NasUser(User):
     type = models.ForeignKey(Group, on_delete=models.CASCADE)
@@ -17,14 +27,14 @@ class Program(models.Model):
 
 
 class Course(models.Model):
-    name = models.CharField(max_length=256)
-    level = models.ForeignKey(Group, related_name='level')
-    area = models.ForeignKey(Group, related_name='area')
-    duration = models.IntegerField(default=0)
-    start = models.DateField()
-    end = models.DateField()
-    number_of_people = models.IntegerField(default=0)
-    programmes = models.ManyToManyField(Program)
+    name = models.CharField(max_length=256, blank=False, null=False)
+    level = models.ForeignKey(Group, related_name='level', blank=False, null=False)
+    area = models.ForeignKey(Group, related_name='area', blank=False, null=False)
+    duration = models.IntegerField(default=0, blank=False, null=False)
+    start = models.DateField(blank=False, null=False)
+    end = models.DateField(blank=False, null=False)
+    number_of_people = models.IntegerField(default=0, blank=False, null=True)
+    programmes = models.ManyToManyField(Program, blank=False, null=False)
 
 
 class Content(models.Model):
