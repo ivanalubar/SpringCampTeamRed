@@ -4,6 +4,10 @@ from datetime import date
 from django.db.models.signals import post_save
 
 
+class NasUser(User):
+    type = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     description = models.CharField(max_length=100, default='')
@@ -16,11 +20,6 @@ def create_profile(sender, **kwargs):
 
 
 post_save.connect(create_profile, sender = User)
-
-
-class NasUser(User):
-    type = models.ForeignKey(Group, on_delete=models.CASCADE)
-
 
 class Program(models.Model):
     name = models.ForeignKey(Group, on_delete=models.CASCADE)
