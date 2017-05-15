@@ -15,16 +15,8 @@ def create_profile(sender, **kwargs):
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
 
-post_save.connect(create_profile, sender = User)
-
-
-class NasUser(User):
-    type = models.ForeignKey(Group, on_delete=models.CASCADE)
-
-
 class Program(models.Model):
-    name = models.ForeignKey(Group, on_delete=models.CASCADE)
-
+    name = models.CharField(max_length=256, default='')
 
 class Course(models.Model):
     name = models.CharField(max_length=256, blank=False, null=False)
@@ -35,10 +27,23 @@ class Course(models.Model):
     end = models.DateField(blank=False, null=False)
     number_of_people = models.IntegerField(default=0, blank=False, null=True)
     programmes = models.ManyToManyField(Program, blank=False, null=False)
+    professor=models.ManyToManyField(User)
+
+
+class UserIndex(models.Model):
+    user=models.ForeignKey(User)
+    grade=models.IntegerField()
+    course=models.ForeignKey(Course)
+    date = models.DateField()
+
+post_save.connect(create_profile, sender = User)
+
 
 
 class Content(models.Model):
     type = models.ForeignKey(Group, on_delete=models.CASCADE)
+    data = models.TextField(default='')
+
 
 
 
