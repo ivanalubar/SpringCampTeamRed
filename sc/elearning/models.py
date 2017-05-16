@@ -4,20 +4,29 @@ from datetime import date
 from django.db.models.signals import post_save
 
 
+class NasUser(User):
+    type = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
     description = models.CharField(max_length=100, default='')
     city = models.CharField(max_length=100, default='')
     phone = models.IntegerField(default=0)
 
+    
 def create_profile(sender, **kwargs):
     if kwargs['created']:
         user_profile = UserProfile.objects.create(user=kwargs['instance'])
 
 
+post_save.connect(create_profile, sender = User)
+        
+  
 class Program(models.Model):
     name = models.CharField(max_length=256, default='')
 
+    
 class Course(models.Model):
     name = models.CharField(max_length=256, blank=False, null=False)
     level = models.ForeignKey(Group, related_name='level', blank=False, null=False)
@@ -35,9 +44,6 @@ class UserIndex(models.Model):
     grade=models.IntegerField()
     course=models.ForeignKey(Course)
     date = models.DateField()
-
-post_save.connect(create_profile, sender = User)
-
 
 
 class Content(models.Model):
