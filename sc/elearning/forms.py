@@ -1,7 +1,8 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.forms import ModelForm, widgets, CharField, Form, PasswordInput, models
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required = True)
@@ -15,6 +16,7 @@ class RegistrationForm(UserCreationForm):
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
         if commit:
+            user.type = Group.objects.get(name = 'student')
             user.save()
         return user
 
