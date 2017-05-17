@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, Group
 from django.forms import ModelForm, widgets, CharField, Form, PasswordInput, models
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import Course
 
 
 class RegistrationForm(UserCreationForm):
@@ -10,21 +11,18 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
+
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email = self.cleaned_data['email']
         if commit:
-            user.type = Group.objects.get(name = 'student')
+            user.type = Group.objects.get(name='student')
             user.save()
         return user
 
-#class UserForm(ModelForm):
 
-   # class Meta:
-      #  model = forms.NasUser
-      #  fields = ('username', 'email', 'password','first_name', 'last_name','group')
 
 class LoginForm(Form):
     username = CharField()
@@ -42,9 +40,11 @@ class EditProfileForm(UserChangeForm):
         # moze ici i preko ovog - > exclude = ()
 
 
-#class CourseForm(ModelForm):
-    #class Meta:
-    # model = forms.Course
+class CourseForm(ModelForm):
+    class Meta:
+        model = Course
+        fields = ('name', 'level', 'area', 'duration', 'start', 'end', 'number_of_people', 'programmes', 'professor')
+
 
 
 #  fields = ('name', 'start', 'duration', 'level', 'area', 'end', 'number_of_people', 'programmes')

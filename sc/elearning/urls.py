@@ -17,5 +17,6 @@ urlpatterns = [
     url(r'^password_reset/done/$', password_reset_done, {'template_name': 'registration/reset_password_done.html'}, name='password_reset_done'),
     url(r'^reset-password/confirm/$', password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset-password/complete/$', password_reset_complete, name='password_reset_complete'),
-
+    url(r'^course/$', views.course, name='course'),
+    url(r'^list/$', views.list, name='list'),
 ]

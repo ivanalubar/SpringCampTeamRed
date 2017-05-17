@@ -17,7 +17,7 @@ def registration(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('elearning')
+            return redirect('/elearning')
     else:
         form = RegistrationForm()
     args = {'form': form}
@@ -61,3 +61,9 @@ def change_password(request):
         form = PasswordChangeForm(user =request.user)
         args = {'form': form}
         return render(request, 'registration/change_password.html', args)
+
+def course(request):
+    return render(request, 'registration/course.html')
+
+def list(request):
+    return render(request, 'registration/list_of_courses.html')
