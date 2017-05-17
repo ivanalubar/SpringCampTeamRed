@@ -6,7 +6,7 @@ from .models import Course
 
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required = True)
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = User
@@ -37,7 +37,7 @@ class EditProfileForm(UserChangeForm):
             'last_name',
             'password'
         )
-        # moze ici i preko ovog - > exclude = ()
+
 
 
 class CourseForm(ModelForm):

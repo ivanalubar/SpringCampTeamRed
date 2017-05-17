@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from elearning.forms import RegistrationForm, EditProfileForm
+from .forms import RegistrationForm, EditProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -22,6 +22,7 @@ def registration(request):
         form = RegistrationForm()
     args = {'form': form}
     return render(request, 'registration/registration.html', args)
+
 
 def login(request):
     return render(request, 'registration/login.html')
