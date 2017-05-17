@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 
-@login_required
+#@login_required
 def index(request):
     return render(request, 'registration/home.html')
 
@@ -17,7 +17,8 @@ def registration(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/elearning')
+            return redirect('/elearning/')
+
     else:
         form = RegistrationForm()
     args = {'form': form}
@@ -41,6 +42,7 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             return redirect('/registration/profile')
+
     else:
         form = EditProfileForm(instance=request.user)
         args = {'form': form}
