@@ -125,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL='/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'tutorial/media')
+MEDIA_ROOT=os.path.join(BASE_DIR,'elearning/media')
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/elearning/'
 LOGIN_URL = '/elearning/login/'
