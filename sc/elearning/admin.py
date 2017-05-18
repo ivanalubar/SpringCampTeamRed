@@ -6,7 +6,7 @@ from .models import  Course, Content, UserProfile, Program, UserIndex
 #admin.site.site_header='Administration'
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'user_info', 'city', 'phone','description')
+    list_display = ('user', 'user_info', 'city', 'phone', 'description')
 
     def user_info(self, obj):
         return obj.description

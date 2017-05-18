@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegistrationForm, EditProfileForm
+from .forms import RegistrationForm, EditUserForm, EditUserProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -37,21 +37,28 @@ def view_profile(request):
 @login_required
 def edit_profile(request):
     if request.method =='POST':
-        form = EditProfileForm(request.POST, instance=request.user)
-
-        if form.is_valid():
-            form.save()
+        form_user = EditUserForm(instance=request.user)
+        form_userprofile = EditUserProfileForm(instance=request.user)
+        if form_user.is_valid() and form_userprofile.is_valid():
+            form_user.save()
+            form_userprofile.save()
             return redirect('/registration/profile')
+        else:
+            form_user = EditUserForm(instance=request.user)
+            form_userprofile = EditUserProfileForm(instance=request.user)
+            args = {'form_user': form_user, 'form_userprofile': form_userprofile}
+            return render(request, 'registration/edit_profile.html', args)
 
     else:
-        form = EditProfileForm(instance=request.user)
-        args = {'form': form}
+        form_user = EditUserForm(instance=request.user)
+        form_userprofile=EditUserProfileForm(instance=request.user)
+        args = {'form_user': form_user, 'form_userprofile': form_userprofile}
         return render(request, 'registration/edit_profile.html',args)
 
 @login_required
 def change_password(request):
-    if request.method== 'POST':
-        form = PasswordChangeForm(data = request.POST, user =request.user)
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
@@ -66,7 +73,11 @@ def change_password(request):
         return render(request, 'registration/change_password.html', args)
 
 def course(request):
+    args = {'course': request.user.course}
     return render(request, 'registration/course.html')
 
 def list(request):
     return render(request, 'registration/list_of_courses.html')
+
+def bootstrap(request):
+    return render(request, 'botstrap/index.html')
