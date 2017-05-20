@@ -1,19 +1,17 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
-<h2>Course</h2>
-
+    <title>Courses</title>
+    <h2>Courses</h2>
 {% endblock %}
+
 {% block body %}
-<div class="container">
-
-    <p>Course name: {{ Course }}</p>
-    <p>level: {{ Course.name }}</p>
-    <p>Duration: {{ Course.duration }}</p>
-    <p>Level: {{ Course.level }}</p>
-    <p>Number of people: {{ Course.number_of_people }}</p>
-
-</div>
+    <div class="container">
+        <p>Course name: {{ Course }}</p>
+        <p>level: {{ Course.name }}</p>
+        <p>Duration: {{ Course.duration }}</p>
+        <p>Level: {{ Course.level }}</p>
+        <p>Number of people: {{ Course.number_of_people }}</p>
+    </div>
 {% endblock %}
 

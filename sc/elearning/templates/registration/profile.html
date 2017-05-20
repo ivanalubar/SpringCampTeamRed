@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
 {% block head %}
-
-<h2 class="container" style="text-align: right">{{ user }}</h2>
-
+    <title>Your Profile</title>
+    <h2 class="container" style="text-align: right">{{ user }}</h2>
 {% endblock %}
-{% block body %}
-<div class="container">
 
-    <p>Username: {{ user }}</p>
-    <p>First name: {{ user.first_name }}</p>
-    <p>Last name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Description: {{ user.userprofile.description }}</p>
-    <p>City: {{ user.userprofile.city }}</p>
-    <p>Phone: {{ user.userprofile.phone }}</p>
-    {% if user.userprofile.image %}
-    <p><img src="{{ user.userprofile.image.url }}" width="240"></p>
-    {% endif %}
-</div>
+{% block body %}
+    <div class="container">
+
+        <p>Username: {{ user }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Description: {{ user.userprofile.description }}</p>
+        <p>City: {{ user.userprofile.city }}</p>
+        <p>Phone: {{ user.userprofile.phone }}</p>
+        {% if user.userprofile.image %}
+            <p><img src="{{ user.userprofile.image.url }}" width="240"></p>
+        {% endif %}
+    </div>
 {% endblock %}

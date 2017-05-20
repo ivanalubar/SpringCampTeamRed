@@ -53,7 +53,7 @@ def edit_profile(request):
         form_user = EditUserForm(instance=request.user)
         form_userprofile=EditUserProfileForm(instance=request.user)
         args = {'form_user': form_user, 'form_userprofile': form_userprofile}
-        return render(request, 'registration/edit_profile.html',args)
+        return render(request, 'registration/edit_profile.html', args)
 
 @login_required
 def change_password(request):
