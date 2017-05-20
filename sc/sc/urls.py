@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
@@ -29,6 +28,6 @@ urlpatterns = [
     url(r'^registration/', include('elearning.urls')),
     url(r'^elearning/login/$', auth_views.login, name='login'),
     url(r'^elearning/logout/$', auth_views.logout, name='logout'),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
