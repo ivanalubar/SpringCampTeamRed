@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'django.contrib.auth.views.login',
+    'ckeditor',
+    'ckeditor_uploader',
 
 ]
 
@@ -136,3 +138,11 @@ EMAIL_HOST_USER = 'smartsystemsdd@gmail.com'
 EMAIL_HOST_PASSWORD = 'maxflexo616043'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+CKEDITOR_UPLOAD_PATH = "upload/"
+
+CKEDITOR_CONFINGS = {
+    'default': {
+        'toolbar': None,
+    },
+}

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegistrationForm, EditUserForm, EditUserProfileForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -73,7 +73,7 @@ def change_password(request):
         return render(request, 'registration/change_password.html', args)
 
 def course(request):
-    args = {'course': request.user.course}
+
     return render(request, 'registration/course.html')
 
 def list(request):
@@ -81,3 +81,6 @@ def list(request):
 
 def bootstrap(request):
     return render(request, 'botstrap/index.html')
+
+def redteam(request):
+    return render(request, 'registration/redteam.html')

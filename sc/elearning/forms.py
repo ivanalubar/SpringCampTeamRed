@@ -49,7 +49,17 @@ class EditUserProfileForm(ModelForm):
 class CourseForm(ModelForm):
     class Meta:
         model = Course
-        fields = ('name', 'level', 'area', 'duration', 'start', 'end', 'number_of_people', 'programmes', 'professor')
+        fields = (
+            'name',
+            'level',
+            'area',
+            'duration',
+            'start',
+            'end',
+            'number_of_people',
+            'programmes',
+            'professor'
+        )
 
 
 

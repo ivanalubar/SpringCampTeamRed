@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^reset-password/complete/$', password_reset_complete, name='password_reset_complete'),
     url(r'^course/$', views.course, name='course'),
     url(r'^list/$', views.list, name='list'),
-    url(r'^index$', views.bootstrap, name='bootstrap'),
+    url(r'^index/$', views.bootstrap, name='bootstrap'),
+    url(r'^redteam/$', views.redteam, name='redteam'),
 ]

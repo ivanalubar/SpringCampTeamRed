@@ -7,16 +7,51 @@
 {% endblock %}
 {% block body %}
 <div class="container">
+<hr>
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3></h3>
+            </div>
+        </div>
+        <!-- /.row -->
 
-    <p>Username: {{ user }}</p>
-    <p>First name: {{ user.first_name }}</p>
-    <p>Last name: {{ user.last_name }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Description: {{ user.userprofile.description }}</p>
-    <p>City: {{ user.userprofile.city }}</p>
-    <p>Phone: {{ user.userprofile.phone }}</p>
-    {% if user.userprofile.image %}
-    <p><img src="{{ user.userprofile.image.url }}" width="240"></p>
-    {% endif %}
+        <!-- Page Features -->
+        <div class="row text-center">
+
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    {% if user.userprofile.image %}
+                   <img src="{{ user.userprofile.image.url }}" width="240" alt="">
+                    {% endif %}
+                    <div class="caption">
+                        <h3></h3>
+                         <p style="text-align:left">Description: {{ user.userprofile.description }}</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Jumbotron Header -->
+        <header class="jumbotron hero-spacer">
+                <p style="text-align:left">Username: {{ user }}</p>
+                <p style="text-align:left">First name: {{ user.first_name }}</p>
+                <p style="text-align:left">Last name: {{ user.last_name }}</p>
+                <p style="text-align:left">Email: {{ user.email }}</p>
+
+                <p style="text-align:left">City: {{ user.userprofile.city }}</p>
+                <p style="text-align:left">Phone: {{ user.userprofile.phone }}</p>
+
+            </p>
+        </header>
+
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+
 </div>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 from datetime import date
 from django.db.models.signals import post_save
-
+from ckeditor.fields import RichTextField
 
 class NasUser(User):
     type = models.ForeignKey(Group, on_delete=models.CASCADE)
@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     city = models.CharField(max_length=100, default='')
     description = models.CharField(max_length=100, default='')
-    phone = models.IntegerField(default=0)
+    phone = models.CharField(max_length=20, default='')
     image = models.ImageField(upload_to='profile_image', blank=True, null=True)
 
     def __str__(self):
@@ -43,6 +43,7 @@ class Course(models.Model):
     programmes = models.ManyToManyField(Program, blank=False, null=False)
     description = models.CharField(max_length=100, default='')
     professor = models.ManyToManyField(User)
+    content = RichTextField()
     def __str__(self):
         return self.name
 
