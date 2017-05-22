@@ -1,0 +1,43 @@
+﻿Merge remote-tracking branch 'origin/IvanaLubar/sc3' into IvanaLubar/sc3
+
+# Conflicts:
+#	sc/elearning/models.py
+#	sc/sc/settings.py
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch IvanaLubar/sc3
+# Your branch and 'origin/IvanaLubar/sc3' have diverged,
+# and have 1 and 1 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   sc/elearning/admin.py
+#	modified:   sc/elearning/forms.py
+#	new file:   sc/elearning/migrations/0008_userprofile_image.py
+#	new file:   sc/elearning/migrations/0009_auto_20170518_2107.py
+#	new file:   sc/elearning/migrations/0010_auto_20170518_2148.py
+#	modified:   sc/elearning/models.py
+#	new file:   sc/elearning/static/background.jpg
+#	new file:   sc/elearning/templates/background.jpg
+#	modified:   sc/elearning/templates/base.html
+#	modified:   sc/elearning/templates/registration/change_password.html
+#	modified:   sc/elearning/templates/registration/edit_profile.html
+#	modified:   sc/elearning/templates/registration/home.html
+#	modified:   sc/elearning/templates/registration/profile.html
+#	modified:   sc/elearning/templates/registration/reset_password.html
+#	modified:   sc/elearning/templates/registration/reset_password_done.html
+#	modified:   sc/elearning/urls.py
+#	modified:   sc/elearning/views.py
+#	modified:   sc/sc/settings.py
+#	new file:   sc/tutorial/media/profile_image/14102344_968240843297796_4899897475695883377_n.jpg
+#
+

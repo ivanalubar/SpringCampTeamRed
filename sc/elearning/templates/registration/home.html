@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
-
-    {% block head %}
-    <meta charset="UTF-8">
+{% block head %}
     <title>SpringCamp</title>
-    {% endblock %}
+    <h2  class="container" style="text-align:right">Hello, {{ user }}</h2>
+{% endblock %}
 
+{% block body %}
+    <h1>Red team</h1>
      {% block body %}
-    <h1>Home page</h1>
-    {% endblock %}
+    <h1><a href="/elearning/redteam">Red team</a></h1>
+    <h2>Spring Camp</h2>
+{% endblock %}
