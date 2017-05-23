@@ -5,6 +5,7 @@ from .models import  Course, Content, UserProfile, Program, UserIndex
 # Register your models here.
 #admin.site.site_header='Administration'
 
+
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'user_info', 'city', 'phone', 'description')
 

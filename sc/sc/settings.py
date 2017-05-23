@@ -145,11 +145,9 @@ CKEDITOR_UPLOAD_PATH = "/media/upload/"
 
 CKEDITOR_CONFIGS = {
     'default': {
-       'toolbar': None,},
+        'toolbar': None,
 
-    'awesome_ckeditor': {
-       'toolbar': 'full',
-    },
+    }
 }
 
 REST_FRAMEWORK = {

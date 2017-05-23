@@ -4,19 +4,22 @@ packaging==16.8
 pyparsing==2.2.0
 pytz==2017.2
 six==1.10.0
+django-ckeditor==5.2.2
+django-static-jquery==2.1.4
+Pillow==4.1.1
+olefile==0.44
 
 
 Kristina, 23.05.
-appdirs==1.4.3
-- content==0.1.0
-Django==1.11
-- django-ckeditor==5.2.2
-- django-static-jquery==2.1.4
-- djangorestframework==3.6.3
-- olefile==0.44
-packaging==16.8
-- Pillow==4.1.1
-pyparsing==2.2.0
-pytz==2017.2
-six==1.10.0
+content==0.1.0
+djangorestframework==3.6.3
+
+
+
+
+
+
+
+
+
 

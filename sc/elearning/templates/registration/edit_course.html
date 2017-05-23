@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>Edit Course</title>
+    <h2  class="container" style="text-align: right">{{ user }}</h2>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div style="text-align:right; width:500px;">
+        <form  method="post">
+            {% csrf_token %}
+            {{ form_course.media }}
+            {{ form_course.as_p }}
+            <button type="submit">Submit</button>
+
+        </form>
+    <br>
+    </div>
+{% endblock %}

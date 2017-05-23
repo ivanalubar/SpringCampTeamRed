@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+<<<<<<< HEAD
 from .forms import RegistrationForm, EditUserForm, EditUserProfileForm, NasChangePasswordForm
+=======
+from .forms import RegistrationForm, EditUserForm, EditUserProfileForm, EditCourseForm
+>>>>>>> origin/IvanaLubar/sc3
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from django.contrib import messages
 from rest_framework import viewsets
 from django.core import serializers
@@ -19,11 +24,16 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Course
 from .serializers import CourseSerializer
+=======
+from .models import UserProfile, Course
+
+>>>>>>> origin/IvanaLubar/sc3
 
 
 #@login_required
 def index(request):
     return render(request, 'registration/home.html')
+
 
 def registration(request):
     if request.method == 'POST':
@@ -50,16 +60,27 @@ def view_profile(request):
     args = {'user': request.user}
     return render(request, 'registration/profile.html')
 
+
 @login_required
 def edit_profile(request):
-    if request.method =='POST':
-        form_user = EditUserForm(instance=request.user)
-        form_userprofile = EditUserProfileForm(instance=request.user)
-        if form_user.is_valid() and form_userprofile.is_valid():
+    userprofile, created = UserProfile.objects.get_or_create(user=request.user, defaults={'user': request.user})
+    if request.method == 'POST':
+        print(request.__dict__)
+        post = request.POST.copy()
+        post['user_id'] = request.user.id
+        form_user = EditUserForm(instance=request.user, data=post)
+        form_userprofile = EditUserProfileForm(data=post, instance=userprofile)
+        if form_user.is_valid():
             form_user.save()
-            form_userprofile.save()
-            return redirect('/registration/profile')
+
+            if form_userprofile.is_valid():
+
+                print('I\'m valid!')
+
+                form_userprofile.save()
+                return redirect('/registration/profile')
         else:
+            print('I\'m not valid!')
             form_user = EditUserForm(instance=request.user)
             form_userprofile = EditUserProfileForm(instance=request.user)
             args = {'form_user': form_user, 'form_userprofile': form_userprofile}
@@ -67,7 +88,11 @@ def edit_profile(request):
 
     else:
         form_user = EditUserForm(instance=request.user)
+<<<<<<< HEAD
         form_userprofile = EditUserProfileForm(instance=request.user)
+=======
+        form_userprofile=EditUserProfileForm(instance=userprofile)
+>>>>>>> origin/IvanaLubar/sc3
         args = {'form_user': form_user, 'form_userprofile': form_userprofile}
         return render(request, 'registration/edit_profile.html', args)
 
@@ -81,26 +106,37 @@ def change_password(request):
             update_session_auth_hash(request, form_password.user)
             return redirect('/registration/profile')
         else:
+<<<<<<< HEAD
             messages.info(request, "We cannot approve this password, please try again.")
             return redirect('/registration/change-password')
     else:
         form_password = NasChangePasswordForm(user=request.user)
         args = {'form': form_password}
+=======
+            return redirect('/registration/change_password')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        args = {'form': form}
+>>>>>>> origin/IvanaLubar/sc3
         return render(request, 'registration/change_password.html', args)
 
-def course(request):
 
+def course(request):
     return render(request, 'registration/course.html')
+
 
 def list(request):
     return render(request, 'registration/list_of_courses.html')
 
+
 def bootstrap(request):
     return render(request, 'botstrap/index.html')
+
 
 def redteam(request):
     return render(request, 'registration/redteam.html')
 
+<<<<<<< HEAD
 def jstree(request):
     return render(request, 'jstree/index.html')
 
@@ -123,3 +159,27 @@ class CourseList(APIView):
 
     def post(self):
         pass
+=======
+
+@login_required
+def edit_course(request):
+    if request.method == 'POST':
+        form_user = EditCourseForm(instance=request.user)
+        form_course = EditCourseForm(instance=request.user)
+        if form_course.is_valid():
+            form_course.save()
+            return redirect('/registration/course')
+        else:
+            form_userprofile = EditCourseForm(instance=request.user)
+            args = {'form_course': form_course}
+            return render(request, 'registration/edit_course.html', args)
+
+    else:
+        form_course = EditCourseForm(instance=request.user)
+        form_course = EditCourseForm(instance=request.user)
+        args = {'form_course': form_course}
+        return render(request, 'registration/edit_course.html', args)
+
+
+
+>>>>>>> origin/IvanaLubar/sc3

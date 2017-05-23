@@ -3,8 +3,8 @@ from django.forms import ModelForm, widgets, CharField, Form, PasswordInput, mod
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from .models import Course, UserProfile
-
-
+from ckeditor.fields import RichTextField
+from ckeditor.widgets import CKEditorWidget
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -65,6 +65,28 @@ class EditUserForm(ModelForm):
         )
 
 
+
+class EditCourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        content = forms.CharField(widget=CKEditorWidget())
+        widgets = {
+            'start': widgets.SelectDateWidget(),
+            'end': widgets.SelectDateWidget()
+
+        }
+        fields = (
+            'name',
+            'duration',
+            'start',
+            'end',
+            'level',
+            'number_of_people',
+            'content'
+        )
+
+
+
 class EditUserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
@@ -73,7 +95,18 @@ class EditUserProfileForm(ModelForm):
             'phone',
             'city',
             'image'
+
         )
+
+
+
+#class NasChangePasswordForm(PasswordChangeForm):
+ #   class Meta:
+  #      model = User
+   #     fileds = (
+    #       'new_password1',
+     #       'new_password2'
+      #  )
 
 
 class CourseForm(ModelForm):
@@ -90,6 +123,7 @@ class CourseForm(ModelForm):
             'programmes',
             'professor'
         )
+
 
 
 

@@ -8,3 +8,9 @@ body{
 h1,h2,h3 {
             text-align: center;
         }
+
+form {
+
+            width:400px;
+            margin: 0 auto;
+}

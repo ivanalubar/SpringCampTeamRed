@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^index/$', views.bootstrap, name='bootstrap'),
     url(r'^redteam/$', views.redteam, name='redteam'),
     url(r'^jstree/$', views.jstree, name='jstree'),
-
     #url(r'^courses/', views.CourseList.as_view()),
+    url(r'^course/edit/$', views.edit_course, name='edit_course'),
 
 ]
