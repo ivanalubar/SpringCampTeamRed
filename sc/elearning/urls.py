@@ -1,6 +1,9 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
 from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
+
+
+
 
 app_name = 'elearning'
 
@@ -21,4 +24,8 @@ urlpatterns = [
     url(r'^list/$', views.list, name='list'),
     url(r'^index/$', views.bootstrap, name='bootstrap'),
     url(r'^redteam/$', views.redteam, name='redteam'),
+    url(r'^jstree/$', views.jstree, name='jstree'),
+
+    #url(r'^courses/', views.CourseList.as_view()),
+
 ]

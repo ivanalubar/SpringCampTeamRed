@@ -31,6 +31,25 @@ class RegistrationForm(UserCreationForm):
         return user
 
 
+class NasChangePasswordForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fileds = ('old_password', 'new_password1', 'new_password2')
+
+    def __init__(self, *args, **kwargs):
+        super(PasswordChangeForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['old_password', 'new_password1', 'new_password2']:
+            self.fields[fieldname].help_text = ''
+
+    """def save(self, commit=True):
+        user = super(NasChangePasswordForm, self).save(commit=False)
+        user.password = self.changed_data['new_password1']
+        if commit:
+            user.type = Group.objects.get(name='student')
+            user.save()
+        return user"""
+
 class LoginForm(Form):
     username = CharField()
     password = CharField(widget=PasswordInput())
@@ -55,15 +74,6 @@ class EditUserProfileForm(ModelForm):
             'city',
             'image'
         )
-
-
-#class NasChangePasswordForm(PasswordChangeForm):
- #   class Meta:
-  #      model = User
-   #     fileds = (
-    #       'new_password1',
-     #       'new_password2'
-      #  )
 
 
 class CourseForm(ModelForm):

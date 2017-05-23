@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'elearning.apps.ElearningConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #'django.contrib.auth.views.login',
+    'elearning.apps.ElearningConfig',
     'ckeditor',
     'ckeditor_uploader',
+    'rest_framework',
 
 ]
 
@@ -140,10 +141,21 @@ EMAIL_HOST_PASSWORD = 'maxflexo616043'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-CKEDITOR_UPLOAD_PATH = "upload/"
+CKEDITOR_UPLOAD_PATH = "/media/upload/"
 
-CKEDITOR_CONFINGS = {
+CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': None,
+       'toolbar': None,},
+
+    'awesome_ckeditor': {
+       'toolbar': 'full',
     },
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissions' #OrAnonReadOnly'
+    ]
 }

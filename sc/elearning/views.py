@@ -2,11 +2,24 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import RegistrationForm, EditUserForm, EditUserProfileForm
+from .forms import RegistrationForm, EditUserForm, EditUserProfileForm, NasChangePasswordForm
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from rest_framework import viewsets
+from django.core import serializers
+from .serializers import UserSerializer
+
+#rest_framework
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Course
+from .serializers import CourseSerializer
+
 
 #@login_required
 def index(request):
@@ -18,7 +31,6 @@ def registration(request):
         if form.is_valid():
             form.save()
             return redirect('/elearning/')
-
     else:
         form = RegistrationForm()
     args = {'form': form}
@@ -27,6 +39,10 @@ def registration(request):
 
 def login(request):
     return render(request, 'registration/login.html')
+
+#nakon api courses; importa se view, a nije imao login_redirect
+def login_redirect(request):
+    return redirect('/elearning/')
 
 
 @login_required
@@ -51,25 +67,25 @@ def edit_profile(request):
 
     else:
         form_user = EditUserForm(instance=request.user)
-        form_userprofile=EditUserProfileForm(instance=request.user)
+        form_userprofile = EditUserProfileForm(instance=request.user)
         args = {'form_user': form_user, 'form_userprofile': form_userprofile}
         return render(request, 'registration/edit_profile.html', args)
+
 
 @login_required
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
+        form_password = NasChangePasswordForm(data=request.POST, user=request.user)
+        if form_password.is_valid():
+            form_password.save()
+            update_session_auth_hash(request, form_password.user)
             return redirect('/registration/profile')
         else:
-            return redirect('/registration/change_password')
-
-
+            messages.info(request, "We cannot approve this password, please try again.")
+            return redirect('/registration/change-password')
     else:
-        form = PasswordChangeForm(user =request.user)
-        args = {'form': form}
+        form_password = NasChangePasswordForm(user=request.user)
+        args = {'form': form_password}
         return render(request, 'registration/change_password.html', args)
 
 def course(request):
@@ -84,3 +100,26 @@ def bootstrap(request):
 
 def redteam(request):
     return render(request, 'registration/redteam.html')
+
+def jstree(request):
+    return render(request, 'jstree/index.html')
+
+
+# ViewSets define the view behavior.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+#lists all courses or makes a new one
+class CourseList(APIView):
+    queryset = User.objects.all()
+    serializer_class = CourseSerializer
+
+    def get(self, request):
+        courses = Course.objects.all()
+        serializer = CourseSerializer(courses, many=True)
+        #objekti koje serializiramo, many da zna da triba vratit vise jsona
+        return Response(serializer.data)
+
+    def post(self):
+        pass
