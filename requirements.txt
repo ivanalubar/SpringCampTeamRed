@@ -8,9 +8,6 @@ django-ckeditor==5.2.2
 django-static-jquery==2.1.4
 Pillow==4.1.1
 olefile==0.44
-
-
-Kristina, 23.05.
 content==0.1.0
 djangorestframework==3.6.3
 

@@ -8,12 +8,12 @@
     <div >
         <br>
         <h2>Login</h2>
-        <p style="text-align:center;">You can login here!</p>
+        <p style="text-align:center;"> You can login here!
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Login</button>
           </form>
-
+        </p>
     </div>
 {% endblock %}
