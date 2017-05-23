@@ -2,16 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-<<<<<<< HEAD
-from .forms import RegistrationForm, EditUserForm, EditUserProfileForm, NasChangePasswordForm
-=======
-from .forms import RegistrationForm, EditUserForm, EditUserProfileForm, EditCourseForm
->>>>>>> origin/IvanaLubar/sc3
+from .forms import RegistrationForm, EditUserForm, EditUserProfileForm, EditCourseForm, NasChangePasswordForm
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from django.contrib import messages
 from rest_framework import viewsets
 from django.core import serializers
@@ -24,10 +19,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Course
 from .serializers import CourseSerializer
-=======
 from .models import UserProfile, Course
-
->>>>>>> origin/IvanaLubar/sc3
 
 
 #@login_required
@@ -88,11 +80,7 @@ def edit_profile(request):
 
     else:
         form_user = EditUserForm(instance=request.user)
-<<<<<<< HEAD
-        form_userprofile = EditUserProfileForm(instance=request.user)
-=======
         form_userprofile=EditUserProfileForm(instance=userprofile)
->>>>>>> origin/IvanaLubar/sc3
         args = {'form_user': form_user, 'form_userprofile': form_userprofile}
         return render(request, 'registration/edit_profile.html', args)
 
@@ -106,18 +94,11 @@ def change_password(request):
             update_session_auth_hash(request, form_password.user)
             return redirect('/registration/profile')
         else:
-<<<<<<< HEAD
             messages.info(request, "We cannot approve this password, please try again.")
             return redirect('/registration/change-password')
     else:
         form_password = NasChangePasswordForm(user=request.user)
         args = {'form': form_password}
-=======
-            return redirect('/registration/change_password')
-    else:
-        form = PasswordChangeForm(user=request.user)
-        args = {'form': form}
->>>>>>> origin/IvanaLubar/sc3
         return render(request, 'registration/change_password.html', args)
 
 
@@ -136,7 +117,7 @@ def bootstrap(request):
 def redteam(request):
     return render(request, 'registration/redteam.html')
 
-<<<<<<< HEAD
+
 def jstree(request):
     return render(request, 'jstree/index.html')
 
@@ -159,7 +140,7 @@ class CourseList(APIView):
 
     def post(self):
         pass
-=======
+
 
 @login_required
 def edit_course(request):
@@ -182,4 +163,3 @@ def edit_course(request):
 
 
 
->>>>>>> origin/IvanaLubar/sc3
