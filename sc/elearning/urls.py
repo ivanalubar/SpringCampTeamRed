@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^list/$', views.list, name='list'),
     url(r'^index/$', views.bootstrap, name='bootstrap'),
     url(r'^redteam/$', views.redteam, name='redteam'),
+    url(r'^course/edit/$', views.edit_course, name='edit_course'),
 ]

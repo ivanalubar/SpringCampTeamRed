@@ -142,8 +142,9 @@ EMAIL_USE_TLS = True
 
 CKEDITOR_UPLOAD_PATH = "upload/"
 
-CKEDITOR_CONFINGS = {
+CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': None,
-    },
+
+    }
 }
