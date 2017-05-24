@@ -11,7 +11,7 @@ from django.contrib import messages
 from rest_framework import viewsets
 from django.core import serializers
 from .serializers import UserSerializer
-
+from .controller import user_permission, request_permission
 #rest_framework
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
@@ -24,7 +24,7 @@ from .models import UserProfile, Course
 
 #@login_required
 def index(request):
-    return render(request, 'registration/home.html')
+    return render(request, 'registration/home.html', {'status': request_permission(request)})
 
 
 def registration(request):
@@ -35,12 +35,12 @@ def registration(request):
             return redirect('/elearning/')
     else:
         form = RegistrationForm()
-    args = {'form': form}
+    args = {'form': form,  'status': request_permission(request)}
     return render(request, 'registration/registration.html', args)
 
 
 def login(request):
-    return render(request, 'registration/login.html')
+    return render(request, 'registration/login.html',  {'status': request_permission(request)})
 
 #nakon api courses; importa se view, a nije imao login_redirect
 def login_redirect(request):
@@ -50,7 +50,7 @@ def login_redirect(request):
 @login_required
 def view_profile(request):
     args = {'user': request.user}
-    return render(request, 'registration/profile.html')
+    return render(request, 'registration/profile.html',  {'status': request_permission(request)})
 
 
 @login_required
@@ -75,13 +75,13 @@ def edit_profile(request):
             print('I\'m not valid!')
             form_user = EditUserForm(instance=request.user)
             form_userprofile = EditUserProfileForm(instance=request.user)
-            args = {'form_user': form_user, 'form_userprofile': form_userprofile}
+            args = {'form_user': form_user, 'form_userprofile': form_userprofile,  'status': request_permission(request)}
             return render(request, 'registration/edit_profile.html', args)
 
     else:
         form_user = EditUserForm(instance=request.user)
         form_userprofile=EditUserProfileForm(instance=userprofile)
-        args = {'form_user': form_user, 'form_userprofile': form_userprofile}
+        args = {'form_user': form_user, 'form_userprofile': form_userprofile,  'status': request_permission(request)}
         return render(request, 'registration/edit_profile.html', args)
 
 
@@ -98,28 +98,28 @@ def change_password(request):
             return redirect('/registration/change-password')
     else:
         form_password = NasChangePasswordForm(user=request.user)
-        args = {'form': form_password}
+        args = {'form': form_password,  'status': request_permission(request)}
         return render(request, 'registration/change_password.html', args)
 
 
 def course(request):
-    return render(request, 'registration/course.html')
+    return render(request, 'registration/course.html',  {'status': request_permission(request)})
 
 
 def list(request):
-    return render(request, 'registration/list_of_courses.html')
+    return render(request, 'registration/list_of_courses.html',  {'status': request_permission(request)})
 
 
 def bootstrap(request):
-    return render(request, 'botstrap/index.html')
+    return render(request, 'botstrap/index.html',  {'status': request_permission(request)})
 
 
 def redteam(request):
-    return render(request, 'registration/redteam.html')
+    return render(request, 'registration/redteam.html',  {'status': request_permission(request)})
 
 
 def jstree(request):
-    return render(request, 'jstree/index.html')
+    return render(request, 'jstree/index.html',  {'status': request_permission(request)})
 
 
 # ViewSets define the view behavior.
@@ -152,13 +152,13 @@ def edit_course(request):
             return redirect('/registration/course')
         else:
             form_userprofile = EditCourseForm(instance=request.user)
-            args = {'form_course': form_course}
+            args = {'form_course': form_course,  'status': request_permission(request)}
             return render(request, 'registration/edit_course.html', args)
 
     else:
         form_course = EditCourseForm(instance=request.user)
         form_course = EditCourseForm(instance=request.user)
-        args = {'form_course': form_course}
+        args = {'form_course': form_course,  'status': request_permission(request)}
         return render(request, 'registration/edit_course.html', args)
 
 

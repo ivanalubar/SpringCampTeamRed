@@ -5,8 +5,9 @@ from django.db.models.signals import post_save
 from ckeditor.fields import RichTextField
 
 
-class NasUser(User):
-    type = models.ForeignKey(Group, on_delete=models.CASCADE)
+
+#class NasUser(User):
+ #   type = models.ForeignKey(Group, on_delete=models.CASCADE)
 
 
 class UserProfile(models.Model):
@@ -34,6 +35,14 @@ class Program(models.Model):
         return self.name
 
 
+class Content(models.Model):
+    type = models.ForeignKey(Group, on_delete=models.CASCADE)
+    data = RichTextField()
+
+    def __str__(self):
+        return self.data
+
+
 class Course(models.Model):
     name = models.CharField(max_length=256, blank=False, null=False)
     level = models.ForeignKey(Group, related_name='level', blank=False, null=False)
@@ -45,7 +54,7 @@ class Course(models.Model):
     programmes = models.ManyToManyField(Program, blank=True, null=True)
     description = models.CharField(max_length=100, default='')
     professor = models.ManyToManyField(User)
-    content = RichTextField()
+    content = models.TextField(default='')
 
     def __str__(self):
         return self.name
@@ -61,12 +70,10 @@ class UserIndex(models.Model):
         return self.user.username
 
 
-class Content(models.Model):
-    type = models.ForeignKey(Group, on_delete=models.CASCADE)
-    data = models.TextField(default='')
 
-    def __str__(self):
-        return self.type
+
+
+
 
 
 
