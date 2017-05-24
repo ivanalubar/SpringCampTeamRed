@@ -6,16 +6,22 @@
 {% endblock %}
 
 {% block body %}
-    <div style="text-align:right; width:500px;">
-        <form method="post">
+    <div class="container">
+    <hr>
+        <form method="post" style="width:100%;">
             {% csrf_token %}
-            {{ form_user.as_p }}
-        {{ form_user.errors }} {{ form_user.non_field_errors }}
-            {{ form_userprofile.as_p }}
-        {{ form_userprofile.errors }} {{ form_userprofile.non_field_errors }}
+            <div>
+                {{ form_user.as_p }}
+            </div>
+
+            <div>
+                {{ form_userprofile.as_p }}
+            </div>
+        <hr>
             <button type="submit">Submit</button>
 
         </form>
+
     <br>
     </div>
 {% endblock %}

@@ -1,6 +1,10 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Course
+from ckeditor.widgets import CKEditorWidget
+from django import forms
+from django.forms import widgets
+from ckeditor.fields import RichTextField
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
