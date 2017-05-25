@@ -1,6 +1,6 @@
 body{
-            /*background-color: antiquewhite;*/
-            background-image: url('/static/background.jpg');
+            background-color: antiquewhite;*/
+            /*background-image: url('/static/background.jpg');*/
             background-position: center;
             background-size: cover;
         }

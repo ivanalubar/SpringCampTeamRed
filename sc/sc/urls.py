@@ -37,7 +37,9 @@ urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     #r_f
-    url(r'^courses/', views.CourseList.as_view()),
+    url(r'^api/courses/(?P<course_id>[0-9]+)', views.CourseList.as_view()),
+    url(r'^api/courses/', views.CoursesList.as_view()),
+
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

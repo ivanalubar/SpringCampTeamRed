@@ -102,12 +102,10 @@ def change_password(request):
         return render(request, 'registration/change_password.html', args)
 
 
-def course(request):
-    return render(request, 'registration/course.html',  {'status': request_permission(request)})
-
-
-def list(request):
-    return render(request, 'registration/list_of_courses.html',  {'status': request_permission(request)})
+def courses(request):
+    courses = Course.objects.all()
+    args = {'courses':courses, 'status': request_permission(request)}
+    return render(request, 'registration/course.html', args)
 
 
 def bootstrap(request):
@@ -128,8 +126,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 #lists all courses or makes a new one
-class CourseList(APIView):
-    queryset = User.objects.all()
+class CoursesList(APIView):
     serializer_class = CourseSerializer
 
     def get(self, request):
@@ -138,26 +135,41 @@ class CourseList(APIView):
         #objekti koje serializiramo, many da zna da triba vratit vise jsona
         return Response(serializer.data)
 
-    def post(self):
+    def post(self, request):
         pass
 
 
+class CourseList(APIView):
+    serializer_class = CourseSerializer
+
+    def get(self, request, course_id):
+        course = Course.objects.get(id = course_id)
+        serializer = CourseSerializer(course, many=False)
+        #objekti koje serializiramo, many da zna da triba vratit vise jsona
+        return Response(serializer.data)
+
+    def post(self, request, course_id):
+        course = Course.objects.get(id=course_id)
+        post_data = request.data.copy()
+        for key, value in post_data.items():
+            setattr(course, key, value)
+        course.save()
+        return Response({'status':'success'})
+
+
 @login_required
-def edit_course(request):
+def edit_course(request, course_id):
+    course = Course.objects.get(id = course_id)
     if request.method == 'POST':
-        form_user = EditCourseForm(instance=request.user)
-        form_course = EditCourseForm(instance=request.user)
+        form_course = EditCourseForm(instance=course, data=request.POST)
         if form_course.is_valid():
             form_course.save()
-            return redirect('/registration/course')
+            return redirect('/registration/courses/'+course_id+'/edit/')
         else:
-            form_userprofile = EditCourseForm(instance=request.user)
-            args = {'form_course': form_course,  'status': request_permission(request)}
+            args = {'form_course': form_course,  'status': request_permission(request), 'course_id':course_id}
             return render(request, 'registration/edit_course.html', args)
-
     else:
-        form_course = EditCourseForm(instance=request.user)
-        form_course = EditCourseForm(instance=request.user)
-        args = {'form_course': form_course,  'status': request_permission(request)}
+        form_course = EditCourseForm(instance=course)
+        args = {'form_course': form_course,  'status': request_permission(request), 'course_id':course_id }
         return render(request, 'registration/edit_course.html', args)
 

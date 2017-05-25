@@ -20,12 +20,11 @@ urlpatterns = [
     url(r'^password_reset/done/$', password_reset_done, {'template_name': 'registration/reset_password_done.html'}, name='password_reset_done'),
     url(r'^reset-password/confirm/$', password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset-password/complete/$', password_reset_complete, name='password_reset_complete'),
-    url(r'^course/$', views.course, name='course'),
-    url(r'^list/$', views.list, name='list'),
+    url(r'^courses/$', views.courses, name='courses'),
     url(r'^index/$', views.bootstrap, name='bootstrap'),
     url(r'^redteam/$', views.redteam, name='redteam'),
     url(r'^jstree/$', views.jstree, name='jstree'),
     #url(r'^courses/', views.CourseList.as_view()),
-    url(r'^course/edit/$', views.edit_course, name='edit_course'),
+    url(r'^courses/(?P<course_id>[0-9]+)/edit/$', views.edit_course, name='edit_course'),
 
 ]
